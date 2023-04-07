@@ -1,6 +1,8 @@
 import ActivityList from 'components/ActivityList';
 import { MenuOutlined } from '@ant-design/icons';
 import './App.css';
+import Functional from 'components/Functional';
+import Content from 'components/Content';
 
 function App() {
   const activities = [
@@ -8,6 +10,22 @@ function App() {
       key: '1',
       label: <MenuOutlined />,
       children: 'TEST ACTIVITY',
+    },
+  ];
+
+  const contents = [
+    {
+      key: '1',
+      label: 'Content',
+      children: 'TEST Content',
+    },
+  ];
+
+  const functionals = [
+    {
+      key: '1',
+      label: 'Logs',
+      children: 'TEST LOG',
     },
   ];
 
@@ -19,9 +37,11 @@ function App() {
           <ActivityList activities={activities} />
         </div>
         <div className="middle-center">
-          <div className="middle-center-upper" />
+          <div className="middle-center-upper">
+            <Content contents={contents} />
+          </div>
           <div className="middle-center-lower">
-            {/* <Functional functionals={functionals} /> */}
+            <Functional functionals={functionals} />
           </div>
         </div>
         <div className="middle-right" />
