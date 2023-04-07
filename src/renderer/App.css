@@ -72,6 +72,7 @@
 .tab-pane {
   background: rgb(30, 30, 30);
   color: rgb(212, 212, 212);
+  height: 100% !important;
   overflow: scroll;
 }
 
@@ -83,7 +84,21 @@
   color: rgb(206, 146, 120);
 }
 
+.log_error {
+  color: red;
+}
 
+.log_warn {
+  color: yellow;
+}
+
+.log_info {
+  color: white;
+}
+
+.log_debug {
+  color: white;
+}
 
 th.table-row {
   background-color: rgb(45, 45, 45) !important;
@@ -95,17 +110,11 @@ td.table-row {
   color: rgb(156, 220, 254) !important;
 }
 
-/* table:hover,
-tr:hover,
-th:hover {
-    background: #20293c !important;
-} */
-
 .ant-table-tbody > tr.ant-table-row:hover > td {
   background: #20293c !important;
 }
 
 .ant-table-thead > tr >th{
-  color: #909399  !important;
-  background: white !important;
+  background-color: rgb(45, 45, 45) !important;
+  color: rgb(156, 220, 254) !important;
 }
