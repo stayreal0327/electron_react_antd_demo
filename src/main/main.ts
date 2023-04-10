@@ -23,7 +23,7 @@ class AppUpdater {
   }
 }
 
-let mainWindow: BrowserWindow | null = null;
+global.mainWindowId = null;
 
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
@@ -69,7 +69,7 @@ const createWindow = async () => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
-  mainWindow = new BrowserWindow({
+  const mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
     height: 728,
@@ -80,6 +80,7 @@ const createWindow = async () => {
         : path.join(__dirname, '../../.erb/dll/preload.js'),
     },
   });
+  global.mainWindowId = mainWindow.id;
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
@@ -95,7 +96,7 @@ const createWindow = async () => {
   });
 
   mainWindow.on('closed', () => {
-    mainWindow = null;
+    global.mainWindowId = null;
   });
 
   const menuBuilder = new MenuBuilder(mainWindow);
@@ -131,7 +132,7 @@ app
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
-      if (mainWindow === null) createWindow();
+      if (BrowserWindow.getAllWindows().length === 0) createWindow()
     });
   })
   .catch(console.log);

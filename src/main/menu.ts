@@ -84,6 +84,25 @@ export default class MenuBuilder {
         },
       ],
     };
+    const subMenuFile: DarwinMenuItemConstructorOptions = {
+      label: 'File',
+      submenu: [
+        {
+          label: 'Open',
+          accelerator: 'Command+O',
+          click: () => {
+            const { mainWindowId } = global;
+            if (mainWindowId) {
+              const mainWindow = BrowserWindow.fromId(mainWindowId);
+              if (mainWindow) {
+                mainWindow.webContents.send('main_log', 'File Open clicked');
+              }
+            }
+            console.log('FIle open clicked in main');
+          },
+        },
+      ],
+    };
     const subMenuEdit: DarwinMenuItemConstructorOptions = {
       label: 'Edit',
       submenu: [
@@ -189,7 +208,14 @@ export default class MenuBuilder {
         ? subMenuViewDev
         : subMenuViewProd;
 
-    return [subMenuAbout, subMenuEdit, subMenuView, subMenuWindow, subMenuHelp];
+    return [
+      subMenuAbout,
+      subMenuFile,
+      subMenuEdit,
+      subMenuView,
+      subMenuWindow,
+      subMenuHelp,
+    ];
   }
 
   buildDefaultTemplate() {

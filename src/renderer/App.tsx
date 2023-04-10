@@ -3,8 +3,18 @@ import { MenuOutlined } from '@ant-design/icons';
 import './App.css';
 import Functional from 'components/Functional';
 import Content from 'components/Content';
+import { IpcRendererEvent } from 'electron';
+import useIpcRenderer from '../hooks/useIpcRenderer';
 
 function App() {
+  const onMainLog = (event: IpcRendererEvent, value: any) => {
+    console.log(`onMainLog:${value}`);
+  };
+
+  useIpcRenderer({
+    main_log: onMainLog,
+  });
+
   const activities = [
     {
       key: '1',
